@@ -1,7 +1,7 @@
 id = "flow"
 name = "Flow"
 description = "Flow language support."
-version = "0.1.0"
+version = "0.0.1"
 schema_version = 1
 authors = ["Janek Thomaschewski <janek@thomaschewski.dev>"]
 repository = "https://github.com/jthomaschewski/zed-flow"
