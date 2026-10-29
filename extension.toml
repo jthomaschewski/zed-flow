@@ -1,7 +1,7 @@
 id = "flow"
 name = "Flow"
 description = "Flow language support."
-version = "0.0.1"
+version = "0.0.2"
 schema_version = 1
 authors = ["Janek Thomaschewski <janek@thomaschewski.dev>"]
 repository = "https://github.com/jthomaschewski/zed-flow"
@@ -11,3 +11,4 @@ name = "Flow LSP"
 languages = [
     "JavaScript"
 ]
+opt_in_languages = ["JavaScript"]
