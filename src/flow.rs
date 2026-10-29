@@ -1,6 +1,7 @@
 use std::path::Path;
 
 use zed::LanguageServerId;
+use zed::settings::LspSettings;
 use zed_extension_api::{self as zed, Result, serde_json};
 
 struct FlowExtension {}
@@ -39,7 +40,6 @@ impl zed::Extension for FlowExtension {
         worktree: &zed::Worktree,
     ) -> Result<zed::Command> {
         if !self.worktree_flowconfig_exists(worktree) {
-            // TODO: skip silently
             return Err(".flowconfig file not found".to_string());
         }
 
@@ -67,6 +67,18 @@ impl zed::Extension for FlowExtension {
         }
 
         Err("Flow binary not found. Please install the npm package 'flow-bin'".to_string())
+    }
+
+    fn language_server_workspace_configuration(
+        &mut self,
+        server_id: &LanguageServerId,
+        worktree: &zed::Worktree,
+    ) -> Result<Option<serde_json::Value>> {
+        let settings = LspSettings::for_worktree(server_id.as_ref(), worktree)
+            .ok()
+            .and_then(|lsp_settings| lsp_settings.settings.clone())
+            .unwrap_or_default();
+        Ok(Some(settings))
     }
 }
 
